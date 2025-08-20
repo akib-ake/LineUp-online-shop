@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: #fff;
+  text-align: center;
+  padding: 40px;
+}
+.auth-container {
+  max-width: 400px;
+  margin: auto;
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+}
+input {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background: #6200ea;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: #3700b3;
+}
+nav {
+  margin-bottom: 20px;
+}
+nav a {
+  margin: 0 10px;
+  color: #bb86fc;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}

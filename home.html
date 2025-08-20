@@ -2,20 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login - LineUp</title>
+  <title>Home - LineUp</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="auth-container">
-    <h2>Welcome to LineUp</h2>
-    <div class="form-box">
-      <input type="email" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="login()">Login</button>
-      <button onclick="register()">Register</button>
-    </div>
-    <p id="message"></p>
-  </div>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+
+  <h1>Welcome, you are logged in 🚀</h1>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
