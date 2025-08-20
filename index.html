@@ -3,140 +3,916 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LineUp- Online Shopping</title>
-    <link rel="stylesheet" href="index.css">
+    <title>StyleMart - Online Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --danger: #f94144;
+            --gray: #6c757d;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            color: var(--dark);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--light);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 0.5rem;
+            outline: none;
+            width: 200px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Products */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 0.5rem 0;
+        }
+
+        .product-rating {
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e1e5eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin: 1rem 0;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .header-actions {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        /* Auth specific */
+        .user-info {
+            display: none;
+            align-items: center;
+            color: var(--dark);
+        }
+
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* Dashboard */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-top">
-                <div class="logo">LineUp</div>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>StyleMart</span>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('products')">Products</a></li>
+                    <li><a href="#" onclick="showPage('categories')">Categories</a></li>
+                    <li><a href="#" onclick="showPage('deals')">Deals</a></li>
+                    <li><a href="#" onclick="showPage('about')">About</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search products...">
+                </div>
                 
-                <div class="header-controls">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search for products...">
-                        <button type="submit">Search</button>
-                    </div>
-                    
-                    <div class="cart">
-                        <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-                    </div>
-                    
-                    <div class="user-account">
-                        <a href="login.html">Login</a> | 
-                        <a href="register.html">Register</a>
-                    </div>
-                    
-                    <div class="language-selector">
-                        <select>
-                            <option value="en">English</option>
-                            <option value="es">Spanish</option>
-                            <option value="fr">French</option>
-                        </select>
-                    </div>
-                    
-                    <div class="currency-selector">
-                        <select>
-                            <option value="usd">USD</option>
-                            <option value="eur">EUR</option>
-                            <option value="gbp">GBP</option>
-                        </select>
-                    </div>
-                    
-                    <div class="theme-toggle">
-                        <button id="theme-toggle-btn">Toggle Dark Mode</button>
-                    </div>
-                    
-                    <div class="notification-bell">
-                        <a href="notifications.html">🔔</a>
-                        <span class="notification-badge">3</span>
-                    </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
+                
+                <div class="auth-buttons" id="authButtons">
+                    <button class="btn btn-outline" onclick="showPage('login')">Login</button>
+                    <button class="btn btn-primary" onclick="showPage('signup')">Sign Up</button>
+                </div>
+                
+                <div class="user-info" id="userInfo">
+                    <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" id="userAvatar">
+                    <span id="userName">User</span>
+                    <button class="btn btn-outline" style="margin-left: 15px;" onclick="logout()">Logout</button>
                 </div>
             </div>
         </div>
-        
-        <nav class="nav-main">
-            <div class="container">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
     </header>
 
-    <main class="container">
-        <div class="banner">
-            <img src="https://via.placeholder.com/1200x400/3a86ff/ffffff?text=LineUp+Summer+Collection+Sale" alt="Shop Banner">
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <div class="hero">
+                    <h1>Summer Sale Up To 50% Off</h1>
+                    <p>Discover the latest trends in fashion, electronics, and home goods with our exclusive deals.</p>
+                    <button class="btn btn-primary" onclick="showPage('products')">Shop Now</button>
+                </div>
+                
+                <h2 style="text-align: center; margin-bottom: 2rem;">Featured Products</h2>
+                
+                <div class="products">
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/4361ee/ffffff?text=Smart+Watch" alt="Smart Watch" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Smart Watch Series 5</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="product-price">$249.99</p>
+                            <p>Advanced health monitoring and fitness tracking</p>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/f72585/ffffff?text=Headphones" alt="Headphones" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Wireless Headphones</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="product-price">$179.99</p>
+                            <p>Noise cancellation with 30-hour battery life</p>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/3a0ca3/ffffff?text=Sneakers" alt="Sneakers" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Running Sneakers</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p class="product-price">$129.99</p>
+                            <p>Lightweight and comfortable for all-day wear</p>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/4cc9f0/ffffff?text=Backpack" alt="Backpack" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Travel Backpack</h3>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="product-price">$89.99</p>
+                            <p>Water-resistant with laptop compartment</p>
+                            <div class="product-actions">
+                                <button class="btn btn-outline">Details</button>
+                                <button class="btn btn-primary">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Page -->
+            <div id="products" class="page">
+                <h2 style="text-align: center; margin-bottom: 2rem;">All Products</h2>
+                
+                <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <button class="btn btn-primary">All</button>
+                    <button class="btn btn-outline">Electronics</button>
+                    <button class="btn btn-outline">Clothing</button>
+                    <button class="btn btn-outline">Home</button>
+                    <button class="btn btn-outline">Sports</button>
+                </div>
+                
+                <div class="products">
+                    <!-- Product cards will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Categories Page -->
+            <div id="categories" class="page">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Shop by Category</h2>
+                
+                <div class="products">
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/4361ee/ffffff?text=Electronics" alt="Electronics" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Electronics</h3>
+                            <p>Latest gadgets and devices</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary" onclick="showPage('products')">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/f72585/ffffff?text=Clothing" alt="Clothing" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Clothing</h3>
+                            <p>Fashion for men and women</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary" onclick="showPage('products')">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/3a0ca3/ffffff?text=Home+Decor" alt="Home Decor" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Home & Decor</h3>
+                            <p>Furniture and home accessories</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary" onclick="showPage('products')">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="https://via.placeholder.com/300x200/4cc9f0/ffffff?text=Sports" alt="Sports" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">Sports & Outdoors</h3>
+                            <p>Equipment and activewear</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary" onclick="showPage('products')">Browse</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Deals Page -->
+            <div id="deals" class="page">
+                <div class="hero" style="background: linear-gradient(to right, #ff5858 0%, #f09819 100%);">
+                    <h1>Special Deals - Limited Time Offer</h1>
+                    <p>Get up to 70% off on selected items. Hurry before they're gone!</p>
+                </div>
+                
+                <h2 style="text-align: center; margin: 2rem 0;">Today's Best Deals</h2>
+                
+                <div class="products">
+                    <!-- Deal products will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- About Page -->
+            <div id="about" class="page">
+                <h2 style="text-align: center; margin-bottom: 2rem;">About StyleMart</h2>
+                
+                <div class="card" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <img src="https://via.placeholder.com/800x400/4361ee/ffffff?text=StyleMart+Store" alt="Our Store" style="width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                    </div>
+                    
+                    <p>StyleMart is a leading online retailer committed to providing high-quality products at affordable prices. Founded in 2010, we've grown from a small startup to a trusted shopping destination for millions of customers worldwide.</p>
+                    <br>
+                    <p>Our mission is to make online shopping easy, enjoyable, and accessible to everyone. We carefully curate our product selection to ensure that we offer only the best items from trusted brands and emerging designers.</p>
+                    <br>
+                    <p>With a focus on customer satisfaction, we offer free shipping on orders over $50, easy returns, and 24/7 customer support. We're constantly expanding our product range to bring you the latest trends and innovations.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Page -->
+            <div id="contact" class="page">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Contact Us</h2>
+                
+                <div class="form-container">
+                    <h3 class="form-title">Send us a message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="What is this regarding?">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Type your message here"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Login Page -->
+            <div id="login" class="page">
+                <div class="form-container">
+                    <h2 class="form-title">Login to Your Account</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <label>
+                                <input type="checkbox" id="rememberMe"> Remember me
+                            </label>
+                            <a href="#" style="color: var(--primary); text-decoration: none;">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                    </form>
+                    
+                    <div style="text-align: center; margin: 1.5rem 0;">
+                        <span>Or login with</span>
+                        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem;">
+                            <button class="btn btn-outline"><i class="fab fa-google"></i> Google</button>
+                            <button class="btn btn-outline"><i class="fab fa-facebook-f"></i> Facebook</button>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 1.5rem;">
+                        Don't have an account? <a href="#" onclick="showPage('signup')" style="color: var(--primary);">Sign up here</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Sign Up Page -->
+            <div id="signup" class="page">
+                <div class="form-container">
+                    <h2 class="form-title">Create a New Account</h2>
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <input type="email" id="signupEmail" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" class="form-control" placeholder="Create a password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="termsAgree" required> I agree to the Terms & Conditions
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign Up</button>
+                    </form>
+                    
+                    <div style="text-align: center; margin: 1.5rem 0;">
+                        <span>Or sign up with</span>
+                        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem;">
+                            <button class="btn btn-outline"><i class="fab fa-google"></i> Google</button>
+                            <button class="btn btn-outline"><i class="fab fa-facebook-f"></i> Facebook</button>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 1.5rem;">
+                        Already have an account? <a href="#" onclick="showPage('login')" style="color: var(--primary);">Login here</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page">
+                <h2 style="text-align: center; margin-bottom: 2rem;">User Dashboard</h2>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>12</h3>
+                        <p>Orders</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>23</h3>
+                        <p>Wishlist Items</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-tag"></i>
+                        <h3>5</h3>
+                        <p>Active Coupons</p>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <i class="fas fa-star"></i>
+                        <h3>18</h3>
+                        <p>Reviews</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 2rem 0 1rem;">Recent Orders</h3>
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    <p>You have 3 recent orders</p>
+                    <!-- Order history would be displayed here -->
+                </div>
+            </div>
         </div>
-        
-        <section class="featured-products">
-            <h2 class="section-title">Featured Products</h2>
-            <div class="product-grid" id="featured-products">
-                <!-- Product items will be dynamically loaded here -->
-            </div>
-        </section>
-        
-        <section class="featured-products">
-            <h2 class="section-title">Best Sellers</h2>
-            <div class="product-grid" id="bestseller-products">
-                <!-- Best seller products will be dynamically loaded here -->
-            </div>
-        </section>
-        
-        <section class="featured-products">
-            <h2 class="section-title">New Arrivals</h2>
-            <div class="product-grid" id="newarrival-products">
-                <!-- New arrival products will be dynamically loaded here -->
-            </div>
-        </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>LineUp</h3>
-                    <p>Your one-stop shop for all your fashion needs. Quality products at affordable prices.</p>
+                    <h3>StyleMart</h3>
+                    <p>Your one-stop shop for all your needs. Quality products at affordable prices.</p>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="products.html">Products</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                    <ul style="list-style: none;">
+                        <li><a href="#" onclick="showPage('home')" style="color: white; text-decoration: none;">Home</a></li>
+                        <li><a href="#" onclick="showPage('products')" style="color: white; text-decoration: none;">Products</a></li>
+                        <li><a href="#" onclick="showPage('about')" style="color: white; text-decoration: none;">About Us</a></li>
+                        <li><a href="#" onclick="showPage('contact')" style="color: white; text-decoration: none;">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Customer Service</h3>
-                    <ul>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="returns.html">Returns & Refunds</a></li>
-                        <li><a href="shipping.html">Shipping Information</a></li>
-                        <li><a href="size-guide.html">Size Guide</a></li>
-                    </ul>
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Commerce St, City, Country</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                    <p><i class="fas fa-envelope"></i> support@stylemart.com</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="terms.html">Terms of Service</a></li>
-                        <li><a href="cookies.html">Cookie Policy</a></li>
-                    </ul>
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get special offers and updates</p>
+                    <div class="search-bar" style="background: rgba(255, 255, 255, 0.1);">
+                        <input type="email" placeholder="Your email address" style="color: white;">
+                        <button class="btn btn-primary" style="padding: 0.5rem;">Subscribe</button>
+                    </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 LineUp Online Shopping. All rights reserved.</p>
+                <p>&copy; 2023 StyleMart. All rights reserved.</p>
             </div>
         </div>
     </footer>
-<script src="index.js"></script>
+
+    <script>
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Firebase configuration (replace with your actual config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBJ09LKil-hwcj03XpehrnG5ldpUzlE3JM",
+            authDomain: "lineup-f1.firebaseapp.com",
+            projectId: "lineup-f1",
+            storageBucket: "lineup-f1.firebasestorage.app",
+            messagingSenderId: "550687608005",
+            appId: "1:550687608005:web:1b97104d97be2bf0d334ac",
+            measurementId: "G-BSR68M89W6"
+        };
+
+        // Initialize Firebase (commented out for this example)
+        // firebase.initializeApp(firebaseConfig);
+        // const auth = firebase.auth();
+        // const db = firebase.firestore();
+
+        // Simulate login for demo purposes
+        function simulateLogin() {
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'flex';
+            showPage('dashboard');
+        }
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            simulateLogin();
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            simulateLogin();
+        });
+
+        // Logout function
+        function logout() {
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('userInfo').style.display = 'none';
+            showPage('home');
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            // Check if user is logged in (in a real app, this would check Firebase auth state)
+            const isLoggedIn = false; // Change to true to simulate logged in state
+            
+            if (isLoggedIn) {
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('userInfo').style.display = 'flex';
+            }
+        };
+    </script>
 </body>
 </html>
