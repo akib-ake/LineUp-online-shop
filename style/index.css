@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #4a6076, rgb(109, 185, 157));
+}
+.header {
+    background:linear-gradient(to right, #070707, rgb(3, 40, 54));
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .logo {
+    height: 50px;
+    margin-right: 20px;
+    border-radius: 50px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.header .navigation a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+.header .navigation a:hover {
+    text-decoration: underline;
+}
+.header div {
+    display: flex;
+    align-items: center;
+}
+.header div h1 {
+    margin-left: 10px;
+}
+.header div img {
+    height: 50px;
+}
+
+.intro {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 50px 20px;
+    color: black;
+}
